@@ -10,6 +10,10 @@ function serializeNode(node: ChildNode) {
     return (node as HTMLElement).outerHTML;
   }
 
+  if (node.nodeType === Node.COMMENT_NODE) {
+    return '';
+  }
+
   return node.textContent ?? '';
 }
 
