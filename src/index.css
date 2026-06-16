@@ -1185,7 +1185,7 @@
 
       .hero{ min-height:100svh; border-radius:0 0 1.25rem 1.25rem }
       .hero-content{
-        padding:calc(5.25rem + env(safe-area-inset-top)) max(1.5rem, env(safe-area-inset-left)) 26rem;
+        padding:calc(8rem + env(safe-area-inset-top)) max(1.5rem, env(safe-area-inset-left)) 26rem;
         padding-right:max(1.5rem, env(safe-area-inset-right));
         gap:1.5rem;
       }
