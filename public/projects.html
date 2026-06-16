@@ -54,6 +54,7 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
+      flex-wrap:wrap;
       gap:1rem;
       padding:1rem 0;
     }
@@ -197,6 +198,19 @@
       padding:1.4rem;
       box-shadow:0 20px 40px rgba(0,0,0,.08);
       transition:transform .28s ease, box-shadow .28s ease;
+    }
+    @media (max-width: 640px) {
+      .brand {
+        display: none !important;
+      }
+      .topbar-actions {
+        width: 100%;
+        justify-content: center;
+      }
+      .pill-btn {
+        flex: 1;
+        justify-content: center;
+      }
     }
     .project-card:hover{
       transform:translateY(-6px);
