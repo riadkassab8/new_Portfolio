@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Projects — Riad Kassab</title>
+  <meta name="description" content="Selected projects by Riad Kassab, an Egyptian front-end developer and CEO of Obrix." />
+  <style>
+    :root{
+      --bg:#f5f3ef;
+      --ink:#111111;
+      --muted:rgba(17,17,17,.62);
+      --line:rgba(17,17,17,.08);
+      --accent:#b15f2c;
+      --card:#0f0f10;
+      --radius:28px;
+      --pill:999px;
+    }
+    body[data-theme="dark"]{
+      --bg:#090b12;
+      --ink:#eef2ff;
+      --muted:rgba(226,232,240,.7);
+      --line:rgba(148,163,184,.16);
+      --accent:#8b5cf6;
+      --card:#0e1424;
+      background:
+        radial-gradient(circle at top left, rgba(34,211,238,.14), transparent 24%),
+        radial-gradient(circle at top right, rgba(139,92,246,.16), transparent 22%),
+        linear-gradient(180deg, #0d1220 0%, #05070d 100%);
+      color:var(--ink);
+    }
+    *{ box-sizing:border-box; margin:0; padding:0 }
+    html{ scroll-behavior:smooth }
+    body{
+      font-family: Inter, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(177,95,44,.08), transparent 28%),
+        linear-gradient(180deg, #faf8f5 0%, #f1ede7 100%);
+      color:var(--ink);
+    }
+    a{ color:inherit; text-decoration:none }
+    .shell{ width:min(1180px, calc(100% - 2rem)); margin-inline:auto }
+    @media (min-width:640px){ .shell{ width:min(1180px, calc(100% - 4rem)) } }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:20;
+      backdrop-filter: blur(18px);
+      background:rgba(245,243,239,.72);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      padding:1rem 0;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.7rem;
+      font-weight:700;
+      letter-spacing:-.02em;
+    }
+    .brand-mark{
+      width:2rem;
+      height:2rem;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,#cf8047,#8d4720);
+      color:#fff;
+      box-shadow:0 10px 24px rgba(177,95,44,.25);
+    }
+    .topbar-actions{ display:flex; flex-wrap:wrap; gap:.75rem }
+    .theme-toggle-btn{
+      width:2.85rem;
+      height:2.85rem;
+      display:grid;
+      place-items:center;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.75);
+      border-radius:var(--pill);
+      transition:transform .25s ease, background .25s ease;
+    }
+    .theme-toggle-btn:hover{ transform:translateY(-2px) }
+    .pill-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:.7rem;
+      padding:.45rem .45rem .45rem 1.15rem;
+      border-radius:var(--pill);
+      font-size:.92rem;
+      font-weight:600;
+      transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+    .pill-btn:hover{ transform:translateY(-2px) }
+    .pill-btn-dark{
+      background:#111;
+      color:#fff;
+      box-shadow:0 14px 28px rgba(17,17,17,.12);
+    }
+    .pill-btn-outline{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.75);
+      color:#111;
+    }
+    .pill-badge{
+      width:2rem;
+      height:2rem;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:rgba(255,255,255,.14);
+    }
+    .pill-btn-outline .pill-badge{
+      background:#111;
+      color:#fff;
+    }
+    .icon{ width:1rem; height:1rem; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round }
+
+    .hero{
+      padding:4.25rem 0 2.5rem;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:.55rem;
+      padding:.4rem .95rem;
+      border:1px solid var(--line);
+      border-radius:var(--pill);
+      font-size:.85rem;
+      color:rgba(17,17,17,.7);
+      background:rgba(255,255,255,.55);
+    }
+    .eyebrow-dot{
+      width:.42rem;
+      height:.42rem;
+      border-radius:50%;
+      background:var(--accent);
+    }
+    h1{
+      margin-top:1.25rem;
+      max-width:12ch;
+      font-size:clamp(2.4rem, 7vw, 5.6rem);
+      line-height:.98;
+      letter-spacing:-.045em;
+    }
+    .hero-copy{
+      margin-top:1.2rem;
+      max-width:44rem;
+      font-size:1.02rem;
+      line-height:1.75;
+      color:var(--muted);
+    }
+    .hero-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.85rem;
+      margin-top:1.75rem;
+    }
+    .hero-chip{
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      padding:.7rem .95rem;
+      border-radius:var(--pill);
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.72);
+      color:rgba(17,17,17,.82);
+      font-size:.88rem;
+    }
+
+    .projects{
+      padding:1rem 0 4rem;
+    }
+    .projects-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:1.35rem;
+    }
+    @media (min-width:768px){
+      .projects-grid{ grid-template-columns:repeat(2,1fr) }
+    }
+    @media (min-width:1100px){
+      .projects-grid{ grid-template-columns:repeat(3,1fr) }
+    }
+    .project-card{
+      position:relative;
+      min-height:24rem;
+      border-radius:var(--radius);
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)), var(--card);
+      color:#fff;
+      padding:1.4rem;
+      box-shadow:0 20px 40px rgba(0,0,0,.08);
+      transition:transform .28s ease, box-shadow .28s ease;
+    }
+    .project-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 26px 48px rgba(0,0,0,.14);
+    }
+    .project-meta{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1rem;
+      font-size:.75rem;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.55);
+    }
+    .project-open{
+      width:2.5rem;
+      height:2.5rem;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:rgba(255,255,255,.11);
+    }
+    .project-mark{
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      pointer-events:none;
+      color:rgba(255,255,255,.08);
+      font-size:7rem;
+      font-weight:800;
+      letter-spacing:-.08em;
+    }
+    .project-content{
+      position:absolute;
+      left:1.4rem;
+      right:1.4rem;
+      bottom:1.4rem;
+    }
+    .project-content h3{
+      font-size:1.6rem;
+      letter-spacing:-.03em;
+      margin-bottom:.55rem;
+    }
+    .project-content p{
+      color:rgba(255,255,255,.65);
+      line-height:1.65;
+      font-size:.92rem;
+    }
+    .project-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.55rem;
+      margin-top:1rem;
+    }
+    .project-tag{
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:var(--pill);
+      padding:.48rem .85rem;
+      font-size:.82rem;
+      color:#fff;
+    }
+    .footer-note{
+      padding:0 0 4rem;
+      color:rgba(17,17,17,.58);
+      text-align:center;
+      font-size:.95rem;
+    }
+    body[data-theme="dark"] .topbar{
+      background:rgba(9,11,18,.72);
+    }
+    body[data-theme="dark"] .theme-toggle-btn,
+    body[data-theme="dark"] .pill-btn-outline{
+      background:rgba(8,11,19,.52);
+      color:#f8fbff;
+    }
+    body[data-theme="dark"] .pill-btn-dark{
+      background:linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%);
+      box-shadow:0 14px 28px rgba(72,118,255,.24);
+    }
+    body[data-theme="dark"] .pill-badge{
+      background:rgba(7,10,18,.72);
+      color:#fff;
+    }
+    body[data-theme="dark"] .pill-btn-outline .pill-badge{
+      background:rgba(255,255,255,.08);
+      color:#fff;
+    }
+    body[data-theme="dark"] .eyebrow,
+    body[data-theme="dark"] .hero-chip{
+      background:rgba(255,255,255,.05);
+      color:rgba(248,251,255,.82);
+    }
+    body[data-theme="dark"] .project-card{
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)), var(--card);
+      box-shadow:0 20px 40px rgba(0,0,0,.22);
+    }
+    body[data-theme="dark"] .footer-note{
+      color:rgba(226,232,240,.62);
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="./index.html">
+        <span class="brand-mark">R</span>
+        <span>Riad Kassab</span>
+      </a>
+      <div class="topbar-actions">
+        <button class="theme-toggle-btn" id="themeToggle" type="button" aria-label="Toggle theme">
+          <span id="themeToggleIcon" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 3v2.5M12 18.5V21M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M3 12h2.5M18.5 12H21M4.93 19.07l1.77-1.77M17.3 6.7l1.77-1.77M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/></svg>
+          </span>
+        </button>
+        <a class="pill-btn pill-btn-outline" href="./index.html#works">
+          Back to Home
+          <span class="pill-badge">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+          </span>
+        </a>
+        <a class="pill-btn pill-btn-dark" href="https://obrix-ashy.vercel.app/" target="_blank" rel="noreferrer">
+          Visit Obrix
+          <span class="pill-badge">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="shell">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          Full Project Archive
+        </div>
+        <h1>Selected work by an Egyptian front-end developer.</h1>
+        <p class="hero-copy">
+          This page brings together the broader range of websites and web interfaces I have built across business, e-commerce, education, healthcare, and brand-focused projects. The goal is always the same: clean presentation, solid front-end execution, and a result that feels ready for real clients.
+        </p>
+        <div class="hero-meta">
+          <div class="hero-chip">17 live projects</div>
+          <div class="hero-chip">Business websites, landing pages, dashboards, and stores</div>
+          <div class="hero-chip">Built through client-style execution and founder thinking</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects">
+      <div class="shell">
+        <div class="projects-grid">
+          <a href="https://metal-factory-steel-factory.vercel.app/" target="_blank" rel="noreferrer" class="project-card">
+            <div class="project-meta"><span>Industrial • 2025</span><span class="project-open"><svg class="icon" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-mark">01</div>
+            <div class="project-content"><h3>Metal Factory</h3><p>Premium industrial website for a steel and metal manufacturing company.</p><div class="project-tags"><span class="project-tag">Web Development</span><span class="project-tag">Industrial</span><span class="project-tag">Design</span></div></div>
+          </a>
+          <a href="https://h-blend-coffee-blend-coffee.vercel.app/" target="_blank" rel="noreferrer" class="project-card">
+            <div class="project-meta"><span>Brand • 2025</span><span class="project-open"><svg class="icon" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-mark">02</div>
+            <div class="project-content"><h3>H Blend Coffee</h3><p>Premium coffee brand website and digital menu experience.</p><div class="project-tags"><span class="project-tag">Brand Website</span><span class="project-tag">Digital Menu</span></div></div>
+          </a>
+          <a href="https://eldod-ecommerce-wind.vercel.app/" target="_blank" rel="noreferrer" class="project-card">
+            <div class="project-meta"><span>E-Commerce • 2024</span><span class="project-open"><svg class="icon" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-mark">03</div>
+            <div class="project-content"><h3>Eldod E-Commerce</h3><p>Complete online store with modern shopping experience.</p><div class="project-tags"><span class="project-tag">E-Commerce</span><span class="project-tag">Web App</span><span class="project-tag">UI/UX</span></div></div>
+          </a>
+          <a href="https://cahier-angular-qhet.vercel.app/login" target="_blank" rel="noreferrer" class="project-card">
+            <div class="project-meta"><span>Application • 2024</span><span class="project-open"><svg class="icon" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-mark">04</div>
+            <div class="project-content"><h3>Coffee Shop Cashier</h3><p>Full cashier management system built with Angular for coffee shops.</p><div class="project-tags"><span class="project-tag">Angular</span><span class="project-tag">Management System</span><span class="project-tag">Development</span></div></div>
+          </a>
+          <a href="https://e-tmam.vercel.app/" target="_blank" rel="noreferrer" class="project-card">
+            <div class="project-meta"><span>Business • 2024</span><span class="project-open"><svg class="icon" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-mark">05</div>
+            <div class="project-content"><h3>E-Tmam Company</h3><p>Professional business website for a services company.</p><div class="project-tags"><span class="project-tag">Business</span><span class="project-tag">Web Development</span></div></div>
+          </a>
+          <a href="https://profissor-landing-teacher-landing.vercel.app/" target="_blank" rel="noreferrer" class="project-card">
+            <div class="project-meta"><span>Portfolio • 2024</span><span class="project-open"><svg class="icon" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-mark">06</div>
+            <div class="project-content"><h3>Professor Portfolio</h3><p>Professional landing page for an academic professor.</p><div class="project-tags"><span class="project-tag">Landing Page</span><span class="project-tag">Education</span></div></div>
+          </a>
+          <a href="https://tourism-landing-tourist-landing-3ft.vercel.app/" target="_blank" rel="noreferrer" class="project-card">
+            <div class="project-meta"><span>Tourism • 2024</span><span class="project-open"><svg class="icon" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-mark">07</div>
+            <div class="project-content"><h3>Tourism Website</h3><p>Tourism landing page showcasing travel destinations and experiences.</p><div class="project-tags"><span class="project-tag">Tourism</span><span class="project-tag">Landing Page</span></div></div>
+          </a>
+          <a href="https://dental-clinic-dental-clinic.vercel.app/" target="_blank" rel="noreferrer" class="project-card">
+            <div class="project-meta"><span>Healthcare • 2024</span><span class="project-open"><svg class="icon" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-mark">08</div>
+            <div class="project-content"><h3>Dental Clinic</h3><p>Professional healthcare website for a dental clinic.</p><div class="project-tags"><span class="project-tag">Healthcare</span><span class="project-tag">Web Development</span></div></div>
+          </a>
+          <a href="https://dr-mohamed-page.vercel.app/" target="_blank" rel="noreferrer" class="project-card">
+            <div class="project-meta"><span>Portfolio • 2024</span><span class="project-open"><svg class="icon" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-mark">09</div>
+            <div class="project-content"><h3>Doctor Portfolio</h3><p>Personal portfolio website for a medical doctor.</p><div class="project-tags"><span class="project-tag">Portfolio</span><span class="project-tag">Healthcare</span></div></div>
+          </a>
+          <a href="https://sneakers-ecommerce-henna.vercel.app/" target="_blank" rel="noreferrer" class="project-card">
+            <div class="project-meta"><span>E-Commerce • 2024</span><span class="project-open"><svg class="icon" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-mark">10</div>
+            <div class="project-content"><h3>Sneakers E-Commerce</h3><p>Modern e-commerce store for sneakers and footwear.</p><div class="project-tags"><span class="project-tag">E-Commerce</span><span class="project-tag">UI/UX</span></div></div>
+          </a>
+          <a href="https://juba-store.vercel.app/" target="_blank" rel="noreferrer" class="project-card">
+            <div class="project-meta"><span>E-Commerce • 2024</span><span class="project-open"><svg class="icon" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-mark">11</div>
+            <div class="project-content"><h3>JUBA Store</h3><p>Online store with a complete shopping experience.</p><div class="project-tags"><span class="project-tag">E-Commerce</span><span class="project-tag">Web App</span></div></div>
+          </a>
+          <a href="https://coffee-corner-a1zq.vercel.app/" target="_blank" rel="noreferrer" class="project-card">
+            <div class="project-meta"><span>Food & Beverage • 2024</span><span class="project-open"><svg class="icon" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-mark">12</div>
+            <div class="project-content"><h3>Coffee Corner Menu</h3><p>Digital menu experience for a coffee shop.</p><div class="project-tags"><span class="project-tag">Digital Menu</span><span class="project-tag">Food & Beverage</span></div></div>
+          </a>
+          <a href="https://quran-academy-sooty.vercel.app/" target="_blank" rel="noreferrer" class="project-card">
+            <div class="project-meta"><span>Education • 2024</span><span class="project-open"><svg class="icon" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-mark">13</div>
+            <div class="project-content"><h3>Quran Academy</h3><p>Educational platform for Quran learning and studies.</p><div class="project-tags"><span class="project-tag">Education</span><span class="project-tag">Web Development</span></div></div>
+          </a>
+          <a href="https://sabora-acadimy.vercel.app/" target="_blank" rel="noreferrer" class="project-card">
+            <div class="project-meta"><span>Education • 2024</span><span class="project-open"><svg class="icon" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-mark">14</div>
+            <div class="project-content"><h3>Sabora Academy</h3><p>Academy website for educational courses and programs.</p><div class="project-tags"><span class="project-tag">Education</span><span class="project-tag">Academy</span></div></div>
+          </a>
+          <a href="https://new-portfolio-site-h2gw.vercel.app/" target="_blank" rel="noreferrer" class="project-card">
+            <div class="project-meta"><span>Portfolio • 2024</span><span class="project-open"><svg class="icon" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-mark">15</div>
+            <div class="project-content"><h3>Engineer Portfolio</h3><p>Personal portfolio website for an engineer.</p><div class="project-tags"><span class="project-tag">Portfolio</span><span class="project-tag">Landing Page</span></div></div>
+          </a>
+          <a href="https://coffe-brand-m-salary.vercel.app/" target="_blank" rel="noreferrer" class="project-card">
+            <div class="project-meta"><span>Brand • 2024</span><span class="project-open"><svg class="icon" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-mark">16</div>
+            <div class="project-content"><h3>Blend Coffee Brand</h3><p>Coffee brand website with premium visual identity.</p><div class="project-tags"><span class="project-tag">Brand Website</span><span class="project-tag">Design</span></div></div>
+          </a>
+          <a href="https://islamic-structure.vercel.app/" target="_blank" rel="noreferrer" class="project-card">
+            <div class="project-meta"><span>Cultural • 2024</span><span class="project-open"><svg class="icon" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-mark">17</div>
+            <div class="project-content"><h3>Islamic Structure</h3><p>Cultural website showcasing Islamic architecture and heritage.</p><div class="project-tags"><span class="project-tag">Cultural</span><span class="project-tag">Web Development</span></div></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="shell footer-note">
+      More projects can always be presented as case studies with deeper breakdowns if needed.
+    </div>
+  </main>
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const themeToggleIcon = document.getElementById('themeToggleIcon');
+
+    function renderThemeIcon(theme){
+      themeToggleIcon.innerHTML = theme === 'dark'
+        ? `<svg class="icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3c0 .34-.02.67-.02 1.01A7.79 7.79 0 0 0 19 11.79c.69 0 1.36-.08 2-.21Z"/></svg>`
+        : `<svg class="icon" viewBox="0 0 24 24"><path d="M12 3v2.5M12 18.5V21M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M3 12h2.5M18.5 12H21M4.93 19.07l1.77-1.77M17.3 6.7l1.77-1.77M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/></svg>`;
+    }
+
+    function applyTheme(theme){
+      const nextTheme = theme === 'dark' ? 'dark' : 'light';
+      document.body.dataset.theme = nextTheme;
+      localStorage.setItem('portfolio-theme', nextTheme);
+      renderThemeIcon(nextTheme);
+    }
+
+    applyTheme(localStorage.getItem('portfolio-theme') || 'light');
+
+    themeToggle.addEventListener('click', () => {
+      applyTheme(document.body.dataset.theme === 'dark' ? 'light' : 'dark');
+    });
+  </script>
+</body>
+</html>
